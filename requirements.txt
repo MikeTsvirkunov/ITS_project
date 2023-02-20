@@ -1,0 +1,7 @@
+notebook
+scikit-learn
+matplotlib
+pandas
+tensorflow
+catboost
+spacy
