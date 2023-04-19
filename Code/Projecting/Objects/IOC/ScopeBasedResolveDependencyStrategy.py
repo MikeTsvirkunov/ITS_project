@@ -2,11 +2,11 @@ from Scope import Scope
 from threading import local
 
 class ScopeBasedResolveDependencyStrategy:
-    def __init__(self) -> None:
-        self.root: Scope = None
-        self.default_scope = lambda: ScopeBasedResolveDependencyStrategy.Root
-        self.curent_scopes: local = local()
+    root: Scope = None
+    default_scope = lambda: ScopeBasedResolveDependencyStrategy.Root
+    curent_scopes: local = local()
     
+    @staticmethod
     def resolve(self, key: str, **args):
         if key != 'Scope.Root':
             if ScopeBasedResolveDependencyStrategy.curent_scope == None:

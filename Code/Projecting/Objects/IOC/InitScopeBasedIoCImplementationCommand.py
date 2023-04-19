@@ -10,7 +10,7 @@ from RegisterIoCDependencyCommand import RegisterIoCDependencyCommand
 
 class InitScopeBasedIoCImplementationCommand(ICommand):
     def action(self) -> None:
-        if (ScopeBasedResolveDependencyStrategy().root == None):
+        if (ScopeBasedResolveDependencyStrategy.root == None):
             storage = dict()
             scope = Scope(parent_scope=LeafScope(IOCContainer().resolve(key='IOC.Default')),
                         storage=storage)
