@@ -8,3 +8,4 @@ spacy
 rake-nltk
 pydot
 graphviz
+fastapi
