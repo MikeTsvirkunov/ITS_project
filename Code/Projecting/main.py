@@ -54,7 +54,10 @@ def sendStudentJson(description=Body()):
     types_of_events = list(map(str, nlp_type_of_event_extraction(description['name_of_event']).ents))
     # skills = 
     results['types_of_events'] = types_of_events
-    results['skills'] = 0
+    predicted = (kcm_extraction_model.predict(nlp_classic(description['descriptor']).vector)[0] + 1) / 2
+    results['skills'] = {'know': predicted[1],
+                         'can': predicted[2], 
+                         'master': predicted[0]}
     # print(len(types_of_events), types_of_events[0])
 
     return results
