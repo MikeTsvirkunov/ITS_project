@@ -32,8 +32,6 @@ def get_vectorized_wp_and_wp(text, vectorizer):
     return np.array(list_of_wp), np.array(list_of_vectors)
 
 
-
-
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
