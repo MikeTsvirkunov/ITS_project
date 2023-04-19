@@ -18,7 +18,8 @@ kcm_extraction_model = load_model('../../PipeLines/Coder/coder_from_spacy_to_kcm
 is_description_model = load_model('../../PipeLines/Classification/check_is_descriptor')
 
 
-# def 
+def vectorize_word_paires():
+    pass
 
 
 def get_skills(vectorised_words):
