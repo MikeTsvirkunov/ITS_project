@@ -12,10 +12,10 @@ import spacy
 from Objects.Analysers.Functions.get_word_pairs import get_wp_in_line_hard
 
 
-nlp_type_of_event_extraction = spacy.load('../../PipeLines/WordsExtraction/words_extract')
+nlp_type_of_event_extraction = spacy.load('../../PipeLines/WordsExtraction/words_extract/')
 nlp_classic = spacy.load('ru_core_news_sm')
-kcm_extraction_model = load_model('../../PipeLines/Coder/coder_from_spacy_to_kcm')
-is_description_model = load_model('../../PipeLines/Classification/check_is_descriptor')
+kcm_extraction_model = load_model('../../PipeLines/Coder/coder_from_spacy_to_kcm__01_04_2023')
+# is_description_model = load_model('../../PipeLines/Classification/check_is_descriptor')
 
 
 def vectorize_word_paires():
@@ -52,7 +52,7 @@ def sendStudentJson(description=Body()):
     results = dict()
     results['id'] = description['id']
     types_of_events = list(map(str, nlp_type_of_event_extraction(description['name_of_event']).ents))
-    skills = 
+    # skills = 
     results['types_of_events'] = types_of_events
     results['skills'] = 0
     # print(len(types_of_events), types_of_events[0])
