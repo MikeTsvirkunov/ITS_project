@@ -59,7 +59,7 @@ def sendStudentJson(description=Body()):
     types_of_events = list(map(str, nlp_type_of_event_extraction(description['name_of_event']).ents))
     results['types_of_events'] = types_of_events
     wp_of_event, wp_of_event_vectorized = get_vectorized_wp_and_wp(description['event_description'], lambda text: nlp_classic(text).vector)
-    is_wp_descriptor = is_description_model.predict(wp_of_event_vectorized) > 0.7
+    is_wp_descriptor = is_description_model.predict(wp_of_event_vectorized) > 0.992
     # print(is_wp_descriptor)
     descriptors_vectorized = wp_of_event_vectorized[is_wp_descriptor.T[0]]
     descriptors_name = wp_of_event[is_wp_descriptor.T[0]]
@@ -80,4 +80,8 @@ def sendStudentJson(description=Body()):
     #     predicted[1]), 'can': float(predicted[2]), 'master': float(predicted[0])}}
 
     return results
+
+# перплексия
+# жокара
+# metrics learning
 
