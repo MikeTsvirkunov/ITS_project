@@ -14,12 +14,12 @@ import spacy
 from Objects.Analysers.Functions.get_word_pairs import get_wp_in_line_hard
 import pandas as pd
 
-nlp_type_of_event_extraction = spacy.load('ITS_project\PipeLines\WordsExtraction\words_extract')
+nlp_type_of_event_extraction = spacy.load('../../PipeLines/WordsExtraction/words_extract/')
 nlp_classic = spacy.load('ru_core_news_sm')
 kcm_extraction_model = tf.keras.models.load_model(
-    '../ITS_project/PipeLines/Coder/coder_from_spacy_to_kcm_onh5.h5')
+    '../../PipeLines/Coder/coder_from_spacy_to_kcm_onh5.h5')
 # kcm_extraction_model.evaluate
-is_description_model = load_model('../ITS_project/PipeLines/Classifications/checker_is_discriptor_spacy_vectorize.h5')
+is_description_model = load_model('../../PipeLines/Classifications/checker_is_discriptor_spacy_vectorize.h5')
 def get_vectorized_wp_and_wp(text, vectorizer):
     list_of_wp = list()
     list_of_vectors = list()
