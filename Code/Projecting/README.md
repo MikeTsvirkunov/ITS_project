@@ -33,6 +33,7 @@ def get_vectorized_wp_and_wp(text, vectorizer):
 # 4) COS distance
 
 * Так как у нас получается множество дескрипторов(мы должны выбрать наиболее подходящий) => мы считаем косинусное расстояние от каждого к каждому
+* <a href="https://github.com/MikeTsvirkunov/ITS_project/blob/FastApi/Code/Projecting/Objects/Functions/get_wp_distances.py">Сама функция</a>
 * БЕЗУСЛОВНО У НАС ИЗ МЕРОПРИЯТИЯ МОЖЕТ ВЫДИЛИТЬСЯ НЕСКОЛЬКО ДЕСКРИПТОРОВ(НО ПОКА МЫ ОСТАВИЛИ ТАК)
 
 # 5) Выделение ЗУВ
