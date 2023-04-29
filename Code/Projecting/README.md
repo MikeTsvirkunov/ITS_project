@@ -30,10 +30,19 @@ def get_vectorized_wp_and_wp(text, vectorizer):
   * <a href="https://github.com/MikeTsvirkunov/ITS_project/blob/FastApi/Code/Teach/is_descriptor_spacy.ipynb">Сама нейронка</a>
 * Т.е на этом шаге мы получаем только те словосочетания, которые могут быть дескрипторами
 
-# 4) 
+# 4) COS distance
+
+* Так как у нас получается множество дескрипторов(мы должны выбрать наиболее подходящий) => мы считаем косинусное расстояние от каждого к каждому
+* БЕЗУСЛОВНО У НАС ИЗ МЕРОПРИЯТИЯ МОЖЕТ ВЫДИЛИТЬСЯ НЕСКОЛЬКО ДЕСКРИПТОРОВ(НО ПОКА МЫ ОСТАВИЛИ ТАК)
+
+# 5) Выделение ЗУВ
+
+* Находим вероятностную характеристику значимости дескриптора в каждомму параметру для ЗУВ
+* <a href="https://github.com/MikeTsvirkunov/ITS_project/blob/FastApi/Code/Teach/vectorize_from_discriptors_KCM.ipynb">Нейронная</a> сеть, которая это делает
 
 
-
+# Дальше идёт резюме рабоыты проекта
+* Его выполнение(сам main, который совмещает в себе всё выше сказанное) можно посмотреть <a href="https://github.com/MikeTsvirkunov/ITS_project/blob/FastApi/Code/Projecting/main.py">Здесь</a>
 
 
 
