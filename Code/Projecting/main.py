@@ -20,7 +20,7 @@ kcm_extraction_model = tf.keras.models.load_model(
     '../../PipeLines/Coder/coder_from_spacy_to_kcm_onh5.h5')
 # kcm_extraction_model.evaluate
 is_description_model = load_model('../../PipeLines/Classifications/checker_is_discriptor_spacy_vectorize/')
-
+# uvicorn main: app --reload
 
 def get_vectorized_wp_and_wp(text, vectorizer):
     list_of_wp = list()
