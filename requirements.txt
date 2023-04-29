@@ -10,3 +10,4 @@ pydot
 graphviz
 fastapi
 pydantic
+uvicorn
