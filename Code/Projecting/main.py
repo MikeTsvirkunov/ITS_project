@@ -11,14 +11,13 @@ import tensorflow as tf
 import numpy as np
 import spacy
 
-from Objects.Analysers.Functions.get_word_pairs import get_wp_in_line_hard
+from Objects.Functions.get_word_pairs import get_wp_in_line_hard
 
 
 nlp_type_of_event_extraction = spacy.load('../../PipeLines/WordsExtraction/words_extract/')
 nlp_classic = spacy.load('ru_core_news_sm')
 kcm_extraction_model = tf.keras.models.load_model(
     '../../PipeLines/Coder/coder_from_spacy_to_kcm_onh5.h5')
-# kcm_extraction_model.evaluate
 is_description_model = load_model('../../PipeLines/Classifications/checker_is_discriptor_spacy_vectorize/')
 # uvicorn main: app --reload
 
