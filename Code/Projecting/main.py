@@ -48,7 +48,7 @@ def sendStudentJson(description=Body()):
     skills = dict()
     results['types_of_events'] = types_of_events
     for sentence in description['event_description'].split('.')[:-1]:
-        print(sentence)
+        # print(sentence)
         wp_of_event, wp_of_event_vectorized = get_vectorized_wp_and_wp(word_pairs=get_wp_in_line_hard(sentence), 
                                                                        vectorizer=lambda text: nlp_classic(text).vector)
         is_wp_descriptor = is_description_model.predict(wp_of_event_vectorized) > 0.992

@@ -16,7 +16,7 @@ def get_vectorized_wp_and_wp(word_pairs: str,
                              vectorizer: callable):
     list_of_wp, list_of_vectors = list(), list()
     for wp in word_pairs:
-        print(wp)
+        # print(wp)
         list_of_vectors.append(vectorizer(wp))
         list_of_wp.append(wp)
     return np.array(list_of_wp), np.array(list_of_vectors)
