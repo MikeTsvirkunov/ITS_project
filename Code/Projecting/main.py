@@ -12,9 +12,11 @@ import numpy as np
 import spacy
 from scipy.spatial.distance import cosine
 
-from Objects.Functions.get_word_pairs import get_wp_in_line_hard, get_vectorized_wp_and_wp
+from Objects.Functions.get_word_pairs import get_wp_in_line_hard, get_vectorized_wp_and_wp, get_vectorized_wp
 from Objects.Functions.get_types_of_event import get_types_of_event_spacy
 from Objects.Functions.get_wp_distances import get_distances_between_wp
+from Levenshtein import distance
+from Objects.Functions.remove_proper_names import remove_proper_names
 # tf.config.run_functions_eagerly(True)
 
 
@@ -47,21 +49,27 @@ def sendStudentJson(description=Body()):
                                                nlp_with_type_ent=nlp_type_of_event_extraction)
     skills = dict()
     results['types_of_events'] = types_of_events
-    for sentence in description['event_description'].split('.')[:-1]:
+    for sentence in filter(lambda a: len(a.split(' '))>2, description['event_description'].split('.')[:-1]):
         # print(sentence)
-        wp_of_event, wp_of_event_vectorized = get_vectorized_wp_and_wp(word_pairs=get_wp_in_line_hard(sentence), 
-                                                                       vectorizer=lambda text: nlp_classic(text).vector)
+        wp_of_event = np.array(get_wp_in_line_hard(sentence))
+        wp_of_event_vectorized = get_vectorized_wp(word_pairs=wp_of_event, vectorizer=lambda text: nlp_classic(str(text)).vector)
+        # print(wp_of_event)
         is_wp_descriptor = is_description_model.predict(wp_of_event_vectorized) > 0.992
-        descriptors_vectorized = wp_of_event_vectorized[is_wp_descriptor.T[0]]
-        descriptors_name = wp_of_event[is_wp_descriptor.T[0]]
+        descriptors_name = np.array([remove_proper_names(str(d)) for d in wp_of_event[is_wp_descriptor.T[0]]])
+        # descriptors_name = np.array(descriptors_name)
+        
+        descriptors_vectorized = get_vectorized_wp(word_pairs=descriptors_name, vectorizer=lambda text: nlp_classic(str(text)).vector)
+        # descriptors_vectorized = wp_of_event_vectorized[is_wp_descriptor.T[0]]
+        # descriptors_name = wp_of_event[is_wp_descriptor.T[0]]
         # print(descriptors_name)
         if len(descriptors_name) != 0:
-            distances = np.argsort(list(map(lambda a: np.array(a).std(), 
+            print('res:\n', descriptors_name)
+            distances = np.argsort(list(map(lambda a: np.array(a).mean(), 
                                             get_distances_between_wp(descriptor_vector=descriptors_vectorized, 
                                                                      metric_function=cosine))))
             predict = kcm_extraction_model.predict([descriptors_vectorized[distances[0:2]]])
-            print(descriptors_name)
-            for name, kcm in zip(descriptors_name, predict):
+            # print(descriptors_name)
+            for name, kcm in zip(descriptors_name[distances[0:5]], predict):
                 skills[name] = {'know': float((kcm[1]+1)/2), 'can': float((kcm[2]+1)/2), 'master': float((kcm[0]+1)/2)}
         
     results['skills'] = skills
