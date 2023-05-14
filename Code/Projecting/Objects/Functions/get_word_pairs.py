@@ -9,7 +9,7 @@ def get_wp_in_line_hard(text: str) -> list:
         for j in range(i, len(words)):
             if j-i > 1:
                 words_pairs.append(' '.join(words[i:j]))
-    return words_pairs
+    return [' '.join(words[i:j]) for j in range(i, len(words)) for i in range(len(words)) if j-i > 1]
 
 
 def get_vectorized_wp_and_wp(word_pairs: str, 
@@ -23,10 +23,8 @@ def get_vectorized_wp_and_wp(word_pairs: str,
 
 
 
-def get_vectorized_wp(word_pairs: str, 
-                             vectorizer: callable):
+def get_vectorized_wp(word_pairs: str, vectorizer: callable) -> np.ndarray:
     list_of_vectors = list()
     for wp in word_pairs:
-        # print(wp)
         list_of_vectors.append(vectorizer(wp))
     return np.array(list_of_vectors)
